@@ -11,6 +11,13 @@
 		146DE0FD2B285FB7006F1759 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146DE0FC2B285FB7006F1759 /* ContentView.swift */; };
 		146DE0FF2B285FB8006F1759 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 146DE0FE2B285FB8006F1759 /* Assets.xcassets */; };
 		146DE1022B285FB8006F1759 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 146DE1012B285FB8006F1759 /* Preview Assets.xcassets */; };
+		146DE1092B285FC9006F1759 /* AddressBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146DE1082B285FC9006F1759 /* AddressBook.swift */; };
+		146DE10B2B285FD7006F1759 /* AddressCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146DE10A2B285FD7006F1759 /* AddressCard.swift */; };
+		146DE10D2B285FE2006F1759 /* Hobby.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146DE10C2B285FE2006F1759 /* Hobby.swift */; };
+		146DE10F2B2860DF006F1759 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146DE10E2B2860DF006F1759 /* ViewModel.swift */; };
+		146DE1112B286345006F1759 /* Members.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146DE1102B286345006F1759 /* Members.swift */; };
+		146DE1152B286378006F1759 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146DE1142B286378006F1759 /* Person.swift */; };
+		146DE1172B2864A1006F1759 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146DE1162B2864A1006F1759 /* DetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +26,13 @@
 		146DE0FC2B285FB7006F1759 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		146DE0FE2B285FB8006F1759 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		146DE1012B285FB8006F1759 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		146DE1082B285FC9006F1759 /* AddressBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressBook.swift; sourceTree = "<group>"; };
+		146DE10A2B285FD7006F1759 /* AddressCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressCard.swift; sourceTree = "<group>"; };
+		146DE10C2B285FE2006F1759 /* Hobby.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hobby.swift; sourceTree = "<group>"; };
+		146DE10E2B2860DF006F1759 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		146DE1102B286345006F1759 /* Members.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Members.swift; sourceTree = "<group>"; };
+		146DE1142B286378006F1759 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
+		146DE1162B2864A1006F1759 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +69,13 @@
 				146DE0FC2B285FB7006F1759 /* ContentView.swift */,
 				146DE0FE2B285FB8006F1759 /* Assets.xcassets */,
 				146DE1002B285FB8006F1759 /* Preview Content */,
+				146DE1082B285FC9006F1759 /* AddressBook.swift */,
+				146DE10A2B285FD7006F1759 /* AddressCard.swift */,
+				146DE10C2B285FE2006F1759 /* Hobby.swift */,
+				146DE10E2B2860DF006F1759 /* ViewModel.swift */,
+				146DE1102B286345006F1759 /* Members.swift */,
+				146DE1142B286378006F1759 /* Person.swift */,
+				146DE1162B2864A1006F1759 /* DetailView.swift */,
 			);
 			path = "iOS5-Duenow-Han";
 			sourceTree = "<group>";
@@ -137,7 +158,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				146DE1112B286345006F1759 /* Members.swift in Sources */,
+				146DE1172B2864A1006F1759 /* DetailView.swift in Sources */,
+				146DE10B2B285FD7006F1759 /* AddressCard.swift in Sources */,
+				146DE10D2B285FE2006F1759 /* Hobby.swift in Sources */,
+				146DE1092B285FC9006F1759 /* AddressBook.swift in Sources */,
 				146DE0FD2B285FB7006F1759 /* ContentView.swift in Sources */,
+				146DE10F2B2860DF006F1759 /* ViewModel.swift in Sources */,
+				146DE1152B286378006F1759 /* Person.swift in Sources */,
 				146DE0FB2B285FB7006F1759 /* iOS5_Duenow_HanApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -8,17 +8,26 @@
 import SwiftUI
 
 struct ContentView: View {
+    @ObservedObject var viewModel: ViewModel
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationView {
+            VStack {
+                List {
+                    ForEach(viewModel.members) { person in NavigationLink {
+                        DetailView(person: person)
+                            .environmentObject(viewModel)
+                    } label: {
+                        Text(person.name)
+                    }
+                    }
+                }
+            }
+            .navigationTitle("Members")
         }
-        .padding()
     }
 }
 
 #Preview {
-    ContentView()
+    ContentView(viewModel: ViewModel())
 }
