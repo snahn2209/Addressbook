@@ -11,7 +11,8 @@ class AddressBook: Codable {
     var addressCards: [AddressCard]
     
     init(addressCards: [AddressCard] ) {
-            self.addressCards = addressCards
+        self.addressCards = addressCards
+        self.save(toFile: "book.json")
     }
     
     init() {
@@ -72,6 +73,7 @@ class AddressBook: Codable {
         }
         return AddressBook()
     }
+    
     func deleteCard(addressCard: AddressCard){
         //delte as a friend
         for c in self.addressCards{

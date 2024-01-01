@@ -11,7 +11,7 @@ import SwiftUI
 struct iOS5_Duenow_HanApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(viewModel: ViewModel())
         }
     }
 }
