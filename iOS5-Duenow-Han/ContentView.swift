@@ -14,21 +14,16 @@ struct ContentView: View {
         NavigationView {
             VStack {
                 List {
-                    ForEach(viewModel.members) { person in
-                        Text(person.firstName)
+                    ForEach(viewModel.members){ person in
+                        NavigationLink(destination: DetailView(person: person)){
+                            Text("\(person.firstName) \(person.lastName)")
+                        }
                     }
-                    
-//                    ForEach(viewModel.members) { person in NavigationLink {
-//                        DetailView(person: person)
-//                            .environmentObject(viewModel)
-//                    } label: {
-//                        Text(person.name)
-//                    }
-//                    }
                 }
             }
             .navigationTitle("Addressbook")
         }
+        .environmentObject(viewModel)
     }
 }
 

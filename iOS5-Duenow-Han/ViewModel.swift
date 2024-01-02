@@ -8,7 +8,7 @@
 import Foundation
 
 class ViewModel: ObservableObject {
-    @Published private var model = AddressBook.addressBook(fromFile: "book.json") ?? AddressBook()
+    @Published private var model: AddressBook = AddressBook()
     
     func updateViews() {
         objectWillChange.send()
@@ -16,12 +16,11 @@ class ViewModel: ObservableObject {
     
     var members: [AddressCard] {
         get {
-            model.save(toFile: "book.json")
             return model.addressCards
         }
         set {
             model.addressCards = newValue
-            model.save(toFile: "book.json")
+            model.saveToFile()
         }
     }
 }

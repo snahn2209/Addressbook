@@ -7,17 +7,63 @@
 
 import Foundation
 
+let FILE_NAME = "book.json"
+
 class AddressBook: Codable {
     var addressCards: [AddressCard]
     
-    init(addressCards: [AddressCard] ) {
-        self.addressCards = addressCards
-        self.save(toFile: "book.json")
+    init() {
+        addressCards = []
+        // Load data from JSON file
+        if let loadedAddressBook = AddressBook.load(fromFile: FILE_NAME) {
+            addressCards = loadedAddressBook.addressCards
+        }
+        //self.saveExampleCards() !!for first test!
+        self.saveToFile()
     }
     
-    init() {
-        self.addressCards = []
+    //for testing
+    func saveExampleCards(){
+        addressCards.append(AddressCard(firstName: "Ricards", lastName: "Bauernfeind", street: "Hochstraße", zip: 12345, city: "Ingolstadt", friends: [AddressCard.ID]()))
+        addressCards.append(AddressCard(firstName: "Demi", lastName: "Vollering", street: "Bergstraße", zip: 12345, city: "Maastricht", friends: [AddressCard.ID]()))
+        addressCards.append(AddressCard(firstName: "Jonas", lastName: "Vingegaard", street: "Seestraße", zip: 12345, city: "Berlin", friends: [AddressCard.ID]()))
     }
+    
+    class func load(fromFile filename: String) -> AddressBook? {
+        do {
+            let documentDirectoryURL = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+            let fileURL = documentDirectoryURL.appendingPathComponent(filename)
+
+            let data = try Data(contentsOf: fileURL)
+            let decoder = JSONDecoder()
+            let addressBook = try decoder.decode(AddressBook.self, from: data)
+            print("Data loaded successfully from: \(fileURL.path)")
+
+            return addressBook
+        } catch {
+            print("Error loading data: \(error)")
+            return nil
+        }
+    }
+    
+    func saveToFile(){
+        do {
+            let documentDirectoryURL = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+            let fileURL = documentDirectoryURL.appendingPathComponent(FILE_NAME)
+
+            let encoder = JSONEncoder()
+            encoder.outputFormatting = .prettyPrinted // optional for pretty-printed JSON
+
+            let data = try encoder.encode(self)
+            try data.write(to: fileURL)
+
+            print("Data saved successfully to: \(fileURL.path)")
+        } catch {
+            print("Error saving data: \(error)")
+        }
+    }
+    
+    
     
     func add(addressCard: AddressCard) {
         addressCards.append(addressCard)
@@ -51,27 +97,6 @@ class AddressBook: Codable {
             }
         }
         return friends
-    }
-    
-    func save(toFile path: String){
-        // file for saving data
-        let path = "book.json"
-        let url = URL(fileURLWithPath: path)
-        // encode and save
-        let encoder = JSONEncoder()
-        if let data = try? encoder.encode(self) {
-            try? data.write(to: url)
-        }
-    }
-    
-    class func addressBook(fromFile path: String) -> AddressBook? {
-        let url = URL(fileURLWithPath: path)
-        if let data = try? Data(contentsOf: url) {
-            let decoder = JSONDecoder()
-            let addressBook = try? decoder.decode(AddressBook.self, from: data)
-            return addressBook
-        }
-        return AddressBook()
     }
     
     func deleteCard(addressCard: AddressCard){

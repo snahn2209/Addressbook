@@ -10,19 +10,14 @@ import SwiftUI
 
 struct DetailView: View {
     @EnvironmentObject var viewModel: ViewModel
-    //@State var person: Person
-    @State private var testName1: String = "ABC"
-    @State private var testName2: String = "DEF"
-   
-
+    
+    let person: AddressCard
     
     var body: some View {
         VStack {
-            //TextField("name", text: $person.name)
-            TextField("name", text: $testName1)
-            TextField("name", text: $testName2)
+            Text("\(person.firstName) \(person.lastName)")
         }
-        .navigationTitle("Title")
+        .navigationTitle("\(person.firstName) \(person.lastName)")
         .onDisappear {
             viewModel.updateViews()
         }
@@ -30,5 +25,5 @@ struct DetailView: View {
 }
 
 #Preview {
-    ContentView(viewModel: ViewModel())
+    NavigationView{DetailView(person: AddressCard(firstName: "Laura", lastName: "Müller", street: "Straße", zip: 12345, city: "Berlin", friends: [AddressCard.ID]()))}
 }
