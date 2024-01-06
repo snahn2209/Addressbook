@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     @ObservedObject var viewModel: ViewModel
     @State private var isAddPersonViewActive = false
+    @State private var selectedCards: [UUID: Bool] = [:]
     
     var body: some View {
         NavigationView {
@@ -22,18 +23,27 @@ struct ContentView: View {
                             .font(.caption)
                         
                     }
+                    .background(
+                        RoundedRectangle(cornerRadius: 8)
+                            .fill(selectedCards[person.id] ?? false ? Color.blue : Color.clear)
+                    )
+                    .onTapGesture {
+                        selectedCards[person.id]?.toggle()
+                    }
                 }
             }
             .navigationTitle("Contacts")
-            .navigationBarItems(leading:
-                Button(action: {
-                    isAddPersonViewActive = true
-                })
-                {Image(systemName: "plus.circle.fill")},
-                trailing: Button(action: {
-                    //löschen
-                })
-                {Text("Edit")}
+            .navigationBarItems(
+                leading: Button(action: {
+                                    isAddPersonViewActive = true
+                                }) {
+                                    Image(systemName: "plus.circle.fill")
+                                },
+                                trailing: Button(action: {
+                                    viewModel.deleteSelectedCards()
+                                }) {
+                                    Text("Delete")
+                                }
             )
         }
         .sheet(isPresented: $isAddPersonViewActive, content: {

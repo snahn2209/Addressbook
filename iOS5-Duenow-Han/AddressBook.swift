@@ -18,8 +18,8 @@ class AddressBook: Codable {
         if let loadedAddressBook = AddressBook.load(fromFile: FILE_NAME) {
             addressCards = loadedAddressBook.addressCards
         }
-        //self.saveExampleCards() !!for first test!
-        self.saveToFile()
+        //self.saveExampleCards()
+        //self.saveToFile()
     }
     
     //for testing
