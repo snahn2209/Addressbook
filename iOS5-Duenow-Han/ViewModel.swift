@@ -16,11 +16,16 @@ class ViewModel: ObservableObject {
     
     var members: [AddressCard] {
         get {
+            model.sortByLastName()
             return model.addressCards
         }
         set {
             model.addressCards = newValue
             model.saveToFile()
         }
+    }
+    func addCard(newContact: AddressCard) {
+        model.add(addressCard: newContact)
+        updateViews()
     }
 }
