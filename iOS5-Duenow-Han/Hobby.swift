@@ -7,11 +7,7 @@
 
 import Foundation
 
-class Hobby: Identifiable, Codable, Equatable {
-    static func == (lhs: Hobby, rhs: Hobby) -> Bool {
-        return lhs.id == rhs.id
-    }
-    
+class Hobby: Identifiable, Codable, Equatable, Hashable {
     var id: UUID = UUID()
     var name: String = ""
     
@@ -20,5 +16,12 @@ class Hobby: Identifiable, Codable, Equatable {
         self.name = name
     }
     
+    static func == (lhs: Hobby, rhs: Hobby) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
 }
 
