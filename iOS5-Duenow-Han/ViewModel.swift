@@ -9,7 +9,7 @@ import Foundation
 
 class ViewModel: ObservableObject {
     @Published private var model: AddressBook = AddressBook()
-    @Published private var selectedCards: [UUID: Bool] = [:]
+    @Published var selectedCards: Set<UUID> = Set()
     
     func updateViews() {
         objectWillChange.send()
@@ -29,17 +29,12 @@ class ViewModel: ObservableObject {
         model.add(addressCard: newContact)
         updateViews()
     }
-    func deleteSelectedCards() {
-        let selectedIDs = selectedCards.filter { $0.value }.map { $0.key }
-        for id in selectedIDs {
-            if let cardToRemove = members.first(where: { $0.id == id }) {
-                model.remove(addressCard: cardToRemove)
-            }
-        }
+    func deleteSelectedCards(at indices: IndexSet) {
+        let selectedIDs = indices.map { members[$0].id }
+        model.deleteCards(withIDs: selectedIDs)
+        selectedCards = Set() // Clear the selection after deletion
         updateViews()
     }
 
-    func toggleSelected(card: AddressCard) {
-        selectedCards[card.id]?.toggle()
-    }
+    
 }
