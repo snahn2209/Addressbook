@@ -20,7 +20,7 @@ struct ContentView: View {
                         VStack(alignment: .leading) {
                             Text("\(person.firstName) \(person.lastName)")
                                 .font(.headline)
-                            Text("\(person.zip) \(person.city), \(person.street)")
+                            Text("\(String(person.zip)) \(person.city), \(person.street)")
                                 .font(.caption)
                             
                         }
