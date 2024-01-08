@@ -9,9 +9,9 @@ import Foundation
 import SwiftUI
 
 struct DetailView: View {
-    @EnvironmentObject var viewModel: ViewModel
-    
-    let person: AddressCard
+    @ObservedObject var viewModel: ViewModel
+    @State private var isEditing = false
+    var person: AddressCard
     
     var body: some View {
         List {
@@ -45,23 +45,18 @@ struct DetailView: View {
             }
         }
         .listStyle(InsetGroupedListStyle())
+        .navigationBarItems(trailing: Button(action: {isEditing.toggle()}, label: {
+            Text("Edit")
+        }))
         .navigationTitle("\(person.firstName) \(person.lastName)")
+        .sheet(isPresented: $isEditing, content: {
+            NavigationView{
+                EditPersonView(viewModel: viewModel ,person: person, isEditing: $isEditing)
+            }
+        })
         .onDisappear {viewModel.updateViews()}
         
         
-        //    VStack {
-        //        List {
-        //            VStack(alignment: .leading) {
-        //                Text("Addresse")
-        //                    .foregroundColor(.gray)
-        //                Text("\(person.street)\n\(person.zip) \(person.city)")
-        //            }
-        //        }
-        //        Text("Hobbies")
-        //        Spacer()
-        //    }
-        //    .navigationTitle("\(person.firstName) \(person.lastName)")
-        //    .onDisappear {viewModel.updateViews()}
     }
 }
 
@@ -75,13 +70,8 @@ struct ListField: View {
 }
 
 #Preview {
-    NavigationView{DetailView(person: AddressCard(
-        firstName: "Laura",
-        lastName: "Müller",
-        street: "Straße",
-        zip: 12345,
-        city: "Berlin",
-        hobbies: [Hobby(name: "Hobby1"), Hobby(name: "Hobby2")] ,
-        friends: [AddressCard.ID]()
-    ))}
+    let viewModel = ViewModel()
+    let person = viewModel.members[0]
+    
+    return NavigationView{DetailView(viewModel: viewModel, person: person)}
 }

@@ -15,7 +15,7 @@ struct ContentView: View {
             VStack {
                 List {
                     ForEach(viewModel.members){ person in
-                        NavigationLink(destination: DetailView(person: person)){
+                        NavigationLink(destination: DetailView(viewModel: viewModel, person: person)){
                             Text("\(person.firstName) \(person.lastName)")
                         }
                     }
@@ -23,7 +23,6 @@ struct ContentView: View {
             }
             .navigationTitle("Addressbook")
         }
-        .environmentObject(viewModel)
     }
 }
 

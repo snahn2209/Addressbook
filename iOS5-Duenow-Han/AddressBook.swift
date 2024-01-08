@@ -33,12 +33,12 @@ class AddressBook: Codable {
         do {
             let documentDirectoryURL = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
             let fileURL = documentDirectoryURL.appendingPathComponent(filename)
-
+            
             let data = try Data(contentsOf: fileURL)
             let decoder = JSONDecoder()
             let addressBook = try decoder.decode(AddressBook.self, from: data)
             print("Data loaded successfully from: \(fileURL.path)")
-
+            
             return addressBook
         } catch {
             print("Error loading data: \(error)")
@@ -50,13 +50,13 @@ class AddressBook: Codable {
         do {
             let documentDirectoryURL = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
             let fileURL = documentDirectoryURL.appendingPathComponent(FILE_NAME)
-
+            
             let encoder = JSONEncoder()
             encoder.outputFormatting = .prettyPrinted // optional for pretty-printed JSON
-
+            
             let data = try encoder.encode(self)
             try data.write(to: fileURL)
-
+            
             print("Data saved successfully to: \(fileURL.path)")
         } catch {
             print("Error saving data: \(error)")
@@ -108,6 +108,13 @@ class AddressBook: Codable {
         //delete card itself
         self.remove(addressCard: addressCard)
     }
-
+    
+    func changeCard(cardID: UUID, changedCard: AddressCard){
+        if let index = addressCards.firstIndex(where: { $0.id == cardID }) {
+            addressCards[index] = changedCard
+            saveToFile()
+        } else {
+            print("Card with ID \(cardID) not found.")
+        }
+    }
 }
-
