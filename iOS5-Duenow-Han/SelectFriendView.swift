@@ -26,10 +26,10 @@ struct SelectFriendView: View {
                     },
                     set: { _ in
                         if self.selectedFriends.wrappedValue.contains(person.id) {
-                            self.selectedFriends.wrappedValue.removeAll(where: { $0 == person.id })
+                            //self.selectedFriends.wrappedValue.removeAll(where: { $0 == person.id })
                             editedPerson.remove(friend: person)
                         } else {
-                            self.selectedFriends.wrappedValue.append(person.id)
+                            //self.selectedFriends.wrappedValue.append(person.id)
                             editedPerson.add(friend: person)
                         }
                     }
