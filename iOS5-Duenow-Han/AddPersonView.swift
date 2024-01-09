@@ -60,3 +60,4 @@ struct AddPersonView: View {
 #Preview {
     AddPersonView(viewModel: ViewModel())
 }
+

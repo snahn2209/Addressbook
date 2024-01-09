@@ -73,14 +73,13 @@ struct EditPersonView: View {
                 Section(header: Text("Friends")) {
                     ForEach(person.friendIDs, id: \.self) { id in
                         Text("\(viewModel.findAddressCard(by: id)?.firstName ?? "Unknown") \(viewModel.findAddressCard(by: id)?.lastName ?? "")")
-                        
-                        Button(action: {
-                            
-                        }) {
-                            Label("Add Friend", systemImage: "person.badge.plus")
-                        }
-                        .foregroundColor(.accentColor)
                     }
+                    Button(action: {
+                        
+                    }) {
+                        Label("Add Friend", systemImage: "person.badge.plus")
+                    }
+                    .foregroundColor(.accentColor)
                 }
             }
             .onAppear {

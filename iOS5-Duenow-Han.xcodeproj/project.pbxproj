@@ -16,6 +16,7 @@
 		146DE10D2B285FE2006F1759 /* Hobby.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146DE10C2B285FE2006F1759 /* Hobby.swift */; };
 		146DE10F2B2860DF006F1759 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146DE10E2B2860DF006F1759 /* ViewModel.swift */; };
 		146DE1172B2864A1006F1759 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146DE1162B2864A1006F1759 /* DetailView.swift */; };
+		E3E8D8492B4D39550031D015 /* AddPersonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E8D8482B4D39550031D015 /* AddPersonView.swift */; };
 		E3F569312B4BF8C1003341C4 /* EditPersonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F569302B4BF8C1003341C4 /* EditPersonView.swift */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +31,7 @@
 		146DE10C2B285FE2006F1759 /* Hobby.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hobby.swift; sourceTree = "<group>"; };
 		146DE10E2B2860DF006F1759 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		146DE1162B2864A1006F1759 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		E3E8D8482B4D39550031D015 /* AddPersonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPersonView.swift; sourceTree = "<group>"; };
 		E3F569302B4BF8C1003341C4 /* EditPersonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPersonView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -73,6 +75,7 @@
 				146DE10E2B2860DF006F1759 /* ViewModel.swift */,
 				146DE1162B2864A1006F1759 /* DetailView.swift */,
 				E3F569302B4BF8C1003341C4 /* EditPersonView.swift */,
+				E3E8D8482B4D39550031D015 /* AddPersonView.swift */,
 			);
 			path = "iOS5-Duenow-Han";
 			sourceTree = "<group>";
@@ -157,6 +160,7 @@
 			files = (
 				146DE1172B2864A1006F1759 /* DetailView.swift in Sources */,
 				146DE10B2B285FD7006F1759 /* AddressCard.swift in Sources */,
+				E3E8D8492B4D39550031D015 /* AddPersonView.swift in Sources */,
 				146DE10D2B285FE2006F1759 /* Hobby.swift in Sources */,
 				146DE1092B285FC9006F1759 /* AddressBook.swift in Sources */,
 				146DE0FD2B285FB7006F1759 /* ContentView.swift in Sources */,
