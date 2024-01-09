@@ -35,11 +35,8 @@ struct DetailView: View {
                     Text("No friends listed")
                         .foregroundColor(.gray)
                 } else {
-                    ForEach(person.friendIDs, id: \.self) { friendID in
-                        // You can display friend information here based on friendID
-                        // For example, you can fetch the friend's details from your data source
-                        // and display them in a list or as needed.
-                        Text("Friend ID: \(friendID)")
+                    ForEach(person.friendIDs, id: \.self) { id in
+                        Text("\(viewModel.findAddressCard(by: id)?.firstName ?? "Unknown") \(viewModel.findAddressCard(by: id)?.lastName ?? "")")
                     }
                 }
             }
@@ -60,14 +57,6 @@ struct DetailView: View {
     }
 }
 
-//for later
-struct ListField: View {
-    let data: String
-    
-    var body: some View {
-        return EmptyView()
-    }
-}
 
 #Preview {
     let viewModel = ViewModel()

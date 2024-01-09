@@ -5,6 +5,8 @@
 //  Created by Pia Dünow on 08.01.24.
 //
 
+//TODO: delte changes from enditedPerson when cancel is pressed
+
 import SwiftUI
 
 struct EditPersonView: View {
@@ -12,6 +14,7 @@ struct EditPersonView: View {
     var person: AddressCard
     @Binding var isEditing: Bool
     @State var editedPerson: AddressCard
+    @State private var newHobby: String = ""
     
     init(viewModel: ViewModel, person: AddressCard, isEditing: Binding<Bool>) {
         self.viewModel = viewModel
@@ -35,22 +38,65 @@ struct EditPersonView: View {
                 }
                 
                 Section(header: Text("Hobbies")) {
-                    ForEach(0..<editedPerson.hobbies.count, id: \.self) { index in
-                        TextField("Hobby \(index + 1)", text: $editedPerson.hobbies[index].name)
+                    List{
+                        ForEach(editedPerson.hobbies.indices, id: \.self) { index in
+                            HStack {
+                                TextField("Hobby \(index + 1)", text: $editedPerson.hobbies[index].name)
+                                
+                                //                                Button(action: {
+                                //                                    editedPerson.hobbies.remove(at: index)
+                                //                                }) {
+                                //                                    Image(systemName: "minus.circle.fill")
+                                //                                        .foregroundColor(.red)
+                                //                                }
+                            }
+                        }
+                        .onDelete { indices in
+                            editedPerson.hobbies.remove(atOffsets: indices)
+                        }
+                    }
+                    
+                    HStack {
+                        TextField("New Hobby", text: $newHobby)
+                        Button(action: {
+                            if !newHobby.isEmpty {
+                                editedPerson.hobbies.append(Hobby(name: newHobby))
+                                newHobby = ""
+                            }
+                        }) {
+                            Image(systemName: "plus.circle.fill")
+                                .foregroundColor(.green)
+                        }
+                    }
+                }
+                
+                Section(header: Text("Friends")) {
+                    ForEach(person.friendIDs, id: \.self) { id in
+                        Text("\(viewModel.findAddressCard(by: id)?.firstName ?? "Unknown") \(viewModel.findAddressCard(by: id)?.lastName ?? "")")
+                        
+                        Button(action: {
+                            
+                        }) {
+                            Label("Add Friend", systemImage: "person.badge.plus")
+                        }
+                        .foregroundColor(.accentColor)
                     }
                 }
             }
+            .onAppear {
+                editedPerson = person
+            }
+            .navigationTitle("Edit Contact")
+            .navigationBarItems(leading: Button("Cancel") {
+                isEditing = false
+                editedPerson = person
+            }, trailing: Button("Save") {
+                viewModel.changeCard(cardID: person.id, changedCard: editedPerson)
+                isEditing = false
+            })
         }
-        .navigationTitle("Edit Contact")
-        .navigationBarItems(leading: Button("Cancel") {
-            isEditing = false
-        }, trailing: Button("Save") {
-            viewModel.changeCard(cardID: person.id, changedCard: editedPerson)
-            isEditing = false
-        })
     }
 }
-
 
 #Preview {
     let viewModel = ViewModel()
@@ -58,3 +104,4 @@ struct EditPersonView: View {
     
     return NavigationView{DetailView(viewModel: viewModel, person: person)}
 }
+

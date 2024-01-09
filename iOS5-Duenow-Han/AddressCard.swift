@@ -55,6 +55,11 @@ class AddressCard: Identifiable, Codable, Equatable, Hashable {
             hobbies.remove(at: index)
         }
     }
+    func remove(hobbyName: String) {
+        if let index = hobbies.firstIndex(where: {$0.name == hobbyName}) {
+            hobbies.remove(at: index)
+        }
+    }
     func add(friend: AddressCard) {
         friendIDs.append(friend.id)
     }
