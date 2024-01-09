@@ -9,20 +9,44 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var viewModel: ViewModel
+    @State private var isAddPersonViewActive = false
+    @State private var selectedCards: [UUID: Bool] = [:]
     
     var body: some View {
         NavigationView {
-            VStack {
-                List {
-                    ForEach(viewModel.members){ person in
-                        NavigationLink(destination: DetailView(viewModel: viewModel, person: person)){
+            List(selection: $viewModel.selectedCards) {
+                ForEach(viewModel.members) { person in
+                    NavigationLink(destination:DetailView(viewModel: viewModel, person: person)){
+                        VStack(alignment: .leading) {
                             Text("\(person.firstName) \(person.lastName)")
+                                .font(.headline)
+                            Text("\(String(person.zip)) \(person.city), \(person.street)")
+                                .font(.caption)
+                            
                         }
                     }
+                    
+                }
+                .onDelete { indexSet in
+                    viewModel.deleteSelectedCards(at: indexSet)
                 }
             }
-            .navigationTitle("Addressbook")
+            
+            .navigationTitle("Contacts")
+            .navigationBarItems(
+                leading: Button(action: {
+                    isAddPersonViewActive = true
+                }) {
+                    Image(systemName: "plus.circle.fill")
+                },
+                trailing: EditButton()
+            )
+            
         }
+        .environmentObject(viewModel)
+        .sheet(isPresented: $isAddPersonViewActive, content: {
+            AddPersonView(viewModel: viewModel)
+        })
     }
 }
 

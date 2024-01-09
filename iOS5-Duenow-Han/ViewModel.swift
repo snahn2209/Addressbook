@@ -9,6 +9,7 @@ import Foundation
 
 class ViewModel: ObservableObject {
     @Published private var model: AddressBook = AddressBook()
+    @Published var selectedCards: Set<UUID> = Set()
     
     func updateViews() {
         objectWillChange.send()
@@ -16,6 +17,7 @@ class ViewModel: ObservableObject {
     
     var members: [AddressCard] {
         get {
+            model.sortByLastName()
             return model.addressCards
         }
         set {
@@ -39,5 +41,16 @@ class ViewModel: ObservableObject {
         model.changeCard(cardID: cardID, changedCard: changedCard)
         updateViews()
     }
+    func addCard(newContact: AddressCard) {
+        model.add(addressCard: newContact)
+        updateViews()
+    }
+    func deleteSelectedCards(at indices: IndexSet) {
+        let selectedIDs = indices.map { members[$0].id }
+        model.deleteCards(withIDs: selectedIDs)
+        selectedCards = Set() // Clear the selection after deletion
+        updateViews()
+    }
+
     
 }

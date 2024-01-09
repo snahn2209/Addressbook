@@ -18,8 +18,8 @@ class AddressBook: Codable {
         if let loadedAddressBook = AddressBook.load(fromFile: FILE_NAME) {
             addressCards = loadedAddressBook.addressCards
         }
-        //self.saveExampleCards() !!for first test!
-        self.saveToFile()
+        //self.saveExampleCards()
+        //self.saveToFile()
     }
     
     //for testing
@@ -99,14 +99,12 @@ class AddressBook: Codable {
         return friends
     }
     
-    func deleteCard(addressCard: AddressCard){
-        //delte as a friend
-        for c in self.addressCards{
-            c.friendIDs = c.friendIDs.filter{$0 != addressCard.id}
+    func deleteCards(withIDs cardIDs: [UUID]) {
+        addressCards.removeAll { cardIDs.contains($0.id) }
+        for friendCards in addressCards {
+            friendCards.friendIDs.removeAll { cardIDs.contains($0) }
         }
-        
-        //delete card itself
-        self.remove(addressCard: addressCard)
+        saveToFile()
     }
     
     func changeCard(cardID: UUID, changedCard: AddressCard){
