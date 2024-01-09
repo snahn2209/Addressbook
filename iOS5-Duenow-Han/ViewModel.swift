@@ -51,6 +51,13 @@ class ViewModel: ObservableObject {
         selectedCards = Set() // Clear the selection after deletion
         updateViews()
     }
+    func addFriendToCard(cardID: UUID, friendID: UUID){
+        if let card = model.findAddressCard(by: cardID){
+            if let friendCard = model.findAddressCard(by: friendID){
+                card.add(friend: friendCard)
+            }
+        }
+    }
 
     
 }

@@ -13,6 +13,7 @@ struct EditPersonView: View {
     @ObservedObject var viewModel: ViewModel
     var person: AddressCard
     @Binding var isEditing: Bool
+    @State var isEditingFriends: Bool = false
     @State var editedPerson: AddressCard
     @State private var newHobby: String = ""
     
@@ -75,11 +76,14 @@ struct EditPersonView: View {
                         Text("\(viewModel.findAddressCard(by: id)?.firstName ?? "Unknown") \(viewModel.findAddressCard(by: id)?.lastName ?? "")")
                     }
                     Button(action: {
-                        
+                        isEditingFriends = true
                     }) {
-                        Label("Add Friend", systemImage: "person.badge.plus")
+                        Label("Edit Friends", systemImage: "person.badge.plus")
                     }
                     .foregroundColor(.accentColor)
+                    .sheet(isPresented: $isEditingFriends) {
+                        SelectFriendView(viewModel: viewModel, isEditingFriends:$isEditingFriends, editedPerson: $editedPerson ,selectedFriends: $editedPerson.friendIDs)
+                    }
                 }
             }
             .onAppear {

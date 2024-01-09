@@ -16,7 +16,7 @@ struct DetailView: View {
     var body: some View {
         List {
             Section(header: Text("Address")) {
-                Text("\(person.street), \(person.zip) \(person.city)")
+                Text("\(person.street), \(String(person.zip)) \(person.city)")
             }
             
             Section(header: Text("Hobbies")) {
