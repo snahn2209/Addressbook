@@ -16,7 +16,7 @@ struct ContentView: View {
         NavigationView {
             List(selection: $viewModel.selectedCards) {
                 ForEach(viewModel.members) { person in
-                    NavigationLink(destination: DetailView(person: person)){
+                    NavigationLink(destination:DetailView(viewModel: viewModel, person: person)){
                         VStack(alignment: .leading) {
                             Text("\(person.firstName) \(person.lastName)")
                                 .font(.headline)
